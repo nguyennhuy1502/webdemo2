@@ -1,5 +1,6 @@
 package com.techvify.loginBasic.dto;
 
+
 import com.techvify.loginBasic.entity.User;
 
 public class CreateUserDTO {

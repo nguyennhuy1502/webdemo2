@@ -1,36 +1,41 @@
 package com.techvify.loginBasic.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 
 @Entity
-@Table(name = "account")
-public class User {
+@Table(name = "Account")
+public class User implements Serializable {
     private static final Long serialVersionUID = 1L;//convert code sang bycode
     @Column(name = "AccountID")
     @Id
-    @GeneratedValue
-    private Short id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private short id;
 
     @Column(name = "Email", length = 50)
     private String email;
 
-    @Column(name = "Username", length = 50, nullable = false, unique = true, updatable = false)
+    @Column(name = "Username", length = 50, nullable = false)
     private String username;
 
-    @Column(name = "password", length = 800, nullable = false)
+    @Column(name = "Password", length = 800, nullable = false)
     private String password;
 
     @Column(name = "FirstName", length = 50)
     private String firstName;
 
-    @OneToOne
-    @JoinColumn(name = "departmentID",referencedColumnName = "departmentID")
+    @Column(name = "LastName", length = 50)
+    private String lastName;
+
+    @ManyToOne
+    @JoinColumn(name = "departmentID")
     private Department department;
 
     public User() {
     }
+
 
     public User(String username, String password) {
         this.username = username;
@@ -77,6 +82,14 @@ public class User {
         this.firstName = firstName;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public Department getDepartment() {
         return department;
     }
@@ -84,4 +97,5 @@ public class User {
     public void setDepartment(Department department) {
         this.department = department;
     }
+
 }
